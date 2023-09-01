@@ -5,23 +5,23 @@
 //! ```toml
 //! [dependencies]
 //! garde = "0.14"
-//! actix-web-garde = "0.1.0"
+//! garde-actix-web = "0.1.0"
 //! ```
 //!
 //! # Usage example
 //!
-//! Simply use `actix-web-garde` exposed types as a drop in for actix types.
+//! Simply use `garde-actix-web` exposed types as a drop in for actix types.
 //!
 //! Your types must implement `Validate` from `garde`. Validation happens during actix's `FromRequest` invocation.
 //!
 //! If payload is invalid, a 400 error is returned (404 for Path).
 //!
-//! Custom error handling can be implemented with an extractor config (`actix_web_garde::web::QueryConfig` in place of `actix_web::web::QueryConfig` for example).
+//! Custom error handling can be implemented with an extractor config (`garde_actix_web::web::QueryConfig` in place of `actix_web::web::QueryConfig` for example).
 //!
 //! ```rust
 //! use actix_web::HttpResponse;
 //! // instead of actix_web::web::Path
-//! use actix_web_garde::web::Path;
+//! use garde_actix_web::web::Path;
 //! use garde::Validate;
 //!
 //! #[derive(Validate)]

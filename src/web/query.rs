@@ -68,7 +68,7 @@ where
 }
 
 /// Replacement for [actix_web::web::QueryConfig](https://docs.rs/actix-web/latest/actix_web/web/struct.QueryConfig.html)
-/// Error handler must map from an `actix_web_garde::error::Error`
+/// Error handler must map from an `garde_actix_web::error::Error`
 #[derive(Clone, Default)]
 pub struct QueryConfig {
   #[allow(clippy::type_complexity)]

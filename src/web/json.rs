@@ -90,7 +90,7 @@ where
 type JsonErrorHandler = Option<Arc<dyn Fn(crate::error::Error, &HttpRequest) -> Error + Send + Sync>>;
 
 /// Replacement for [actix_web::web::JsonConfig](https://docs.rs/actix-web/latest/actix_web/web/struct.JsonConfig.html)
-/// Error handler must map from an `actix_web_garde::error::Error`
+/// Error handler must map from an `garde_actix_web::error::Error`
 #[derive(Clone)]
 pub struct JsonConfig {
   limit: usize,

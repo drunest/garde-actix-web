@@ -67,7 +67,7 @@ where
 }
 
 /// Replacement for [actix_web::web::PathConfig](https://docs.rs/actix-web/latest/actix_web/web/struct.PathConfig.html)
-/// Error handler must map from an `actix_web_garde::error::Error`
+/// Error handler must map from an `garde_actix_web::error::Error`
 #[derive(Clone, Default)]
 pub struct PathConfig {
   #[allow(clippy::type_complexity)]

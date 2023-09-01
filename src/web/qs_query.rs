@@ -72,7 +72,7 @@ where
 }
 
 /// Replacement for [serde_qs::actix::QsQueryConfig](https://docs.rs/serde_qs/latest/serde_qs/actix/struct.QsQueryConfig.html)
-/// Error handler must map from an `actix_web_garde::error::Error`
+/// Error handler must map from an `garde_actix_web::error::Error`
 #[derive(Default)]
 pub struct QsQueryConfig {
   #[allow(clippy::type_complexity)]

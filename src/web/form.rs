@@ -73,7 +73,7 @@ where
 type FormErrHandler = Option<Rc<dyn Fn(crate::error::Error, &HttpRequest) -> Error>>;
 
 /// Replacement for [actix_web::web::FormConfig](https://docs.rs/actix-web/latest/actix_web/web/struct.FormConfig.html)
-/// Error handler must map from an `actix_web_garde::error::Error`
+/// Error handler must map from an `garde_actix_web::error::Error`
 #[derive(Clone)]
 pub struct FormConfig {
   limit: usize,

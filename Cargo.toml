@@ -1,5 +1,5 @@
 [package]
-name = "actix-web-garde"
+name = "garde-actix-web"
 description = "Actix-web garde wrapper"
 readme = "README.md"
 keywords = ["garde", "actix", "actix-web", "validation"]
@@ -8,8 +8,8 @@ version = "0.1.0"
 
 authors = ["Netwo <oss@netwo.com>"]
 edition = "2021"
-repository = "https://github.com/netwo-io/actix-web-garde"
-documentation = "https://docs.rs/actix-web-garde/"
+repository = "https://github.com/netwo-io/garde-actix-web"
+documentation = "https://docs.rs/garde-actix-web/"
 license = "MIT"
 rust-version = "1.71"
 

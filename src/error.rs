@@ -1,6 +1,6 @@
-//! Error exposed by actix-web-garde
+//! Error exposed by garde-actix-web
 //!
-//! Custom error handlers (provided through the divers configs) should map from an `actix_web_garde::error::Error` to an `actix_web::error::Error`
+//! Custom error handlers (provided through the divers configs) should map from an `garde_actix_web::error::Error` to an `actix_web::error::Error`
 use actix_web::error::{JsonPayloadError, PathError, QueryPayloadError, UrlencodedError};
 use actix_web::http::StatusCode;
 use actix_web::{HttpResponse, ResponseError};

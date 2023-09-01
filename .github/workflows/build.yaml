@@ -1,4 +1,4 @@
-name: Actix-web-garde build
+name: garde-actix-web build
 
 on:
   pull_request:
