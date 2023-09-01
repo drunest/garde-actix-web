@@ -3,7 +3,7 @@
 
 [docs.rs]: https://docs.rs/actix-web-garde/latest/actix-web-garde/
 [crates.io]: https://crates.io/crates/actix-web-garde
-[build]: https://github.com/rlebran-netwo/actix-web-garde/actions/workflows/build.yaml
+[build]: https://github.com/rlebran-netwo/actix-web-garde/actions/workflows/build.yaml?branch=main
 [Documentation]: https://img.shields.io/docsrs/actix-web-garde
 [Latest Version]: https://img.shields.io/crates/v/actix-web-garde.svg
 [Build Status]: https://github.com/rlebran-netwo/actix-web-garde/actions/workflows/build.yaml/badge.svg?branch=main
