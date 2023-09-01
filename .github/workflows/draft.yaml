@@ -31,7 +31,7 @@ jobs:
       - name: Get release info
         id: release_info
         run: |
-          version=$(cargo metadata --format-version=1 --no-deps | jq -r '.packages[] | select(.name | .version')
+          version=$(cargo metadata --format-version=1 --no-deps | jq -r '.packages[] | .version')
           prerelease=false
           if [[ "$version" =~ .*-.* ]]; then
             prerelease=true
