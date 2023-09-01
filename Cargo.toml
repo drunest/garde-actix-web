@@ -1,0 +1,34 @@
+[package]
+name = "actix-web-garde"
+description = "Actix-web garde wrapper"
+readme = "README.md"
+keywords = ["garde", "actix", "actix-web", "validation"]
+categories = ["web-programming"]
+version = "0.1.0"
+
+authors = ["Netwo <oss@netwo.com>"]
+edition = "2021"
+repository = "https://github.com/netwo-io/actix-web-garde"
+documentation = "https://docs.rs/actix-web-garde/"
+license = "MIT"
+rust-version = "1.71"
+
+[dependencies]
+actix-http = "3"
+actix-router = "0.5"
+actix-web = "4"
+derive_more = "0.99"
+futures = "0.3"
+garde = "0.14"
+log = "0.4"
+mime = "0.3"
+pin-project-lite = "0.2"
+serde = "1"
+serde_urlencoded = "0.7"
+thiserror = "1.0"
+
+serde_qs = { version = "0.12", optional = true }
+
+[dev-dependencies]
+actix-test = "0.1"
+tokio = { version = "1", features = ["macros"], default-features = false }
