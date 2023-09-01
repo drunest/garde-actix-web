@@ -1,7 +1,7 @@
 # Garde-actix-web &emsp; [![Documentation]][docs.rs] [![Latest Version]][crates.io] [![Build Status]][build]
 
 
-[docs.rs]: https://docs.rs/garde-actix-web/latest/garde-actix-web/
+[docs.rs]: https://docs.rs/garde-actix-web/
 [crates.io]: https://crates.io/crates/garde-actix-web
 [build]: https://github.com/netwo-io/garde-actix-web/actions/workflows/build.yaml?branch=main
 [Documentation]: https://img.shields.io/docsrs/garde-actix-web
