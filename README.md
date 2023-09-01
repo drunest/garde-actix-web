@@ -64,6 +64,10 @@ Context needs to be provided through actix's `data` or `app_data`, if not found 
 
 ### About us
 
-Netwo 
+Garde-actix-web is provided by [Netwo](https://www.netwo.io).
 
-[**We are recruiting !**](https://www.netwo.io/carriere)
+We use this crate for our internal needs and therefore are committed to its maintenance, however we cannot provide any additional guaranty. Use it at your own risks.
+
+While we won't invest in any feature we don't need, we are open to accept any pull request you might propose.
+
+We are a France based full-remote company operating in the telecom sector. If you are interested in learning more, feel free to visit [our career page](https://www.netwo.io/carriere).
