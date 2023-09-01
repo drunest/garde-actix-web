@@ -3,7 +3,7 @@ name: Draft release
 on:
   push:
     branches:
-      - none
+      - main
 
 env:
   CARGO_TERM_COLOR: always
