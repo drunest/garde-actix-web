@@ -3,10 +3,10 @@
 
 [docs.rs]: https://docs.rs/garde-actix-web/latest/garde-actix-web/
 [crates.io]: https://crates.io/crates/garde-actix-web
-[build]: https://github.com/rlebran-netwo/garde-actix-web/actions/workflows/build.yaml?branch=main
+[build]: https://github.com/netwo-io/garde-actix-web/actions/workflows/build.yaml?branch=main
 [Documentation]: https://img.shields.io/docsrs/garde-actix-web
 [Latest Version]: https://img.shields.io/crates/v/garde-actix-web.svg
-[Build Status]: https://github.com/rlebran-netwo/garde-actix-web/actions/workflows/build.yaml/badge.svg?branch=main
+[Build Status]: https://github.com/netwo-io/garde-actix-web/actions/workflows/build.yaml/badge.svg?branch=main
 
 Actix-web wrapper for [garde](https://github.com/jprochazk/garde), a Rust validation library.
 
