@@ -88,6 +88,11 @@ impl QsQueryConfig {
     self.err_handler = Some(Arc::new(f));
     self
   }
+
+  pub fn qs_config(mut self, config: Config) -> Self {
+    self.qs_config = config;
+    self
+  }
 }
 
 #[cfg(test)]
