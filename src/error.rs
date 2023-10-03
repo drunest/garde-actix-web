@@ -4,13 +4,13 @@
 use actix_web::error::{JsonPayloadError, PathError, QueryPayloadError, UrlencodedError};
 use actix_web::http::StatusCode;
 use actix_web::{HttpResponse, ResponseError};
-use garde::Errors;
+use garde::Report;
 use thiserror::Error;
 
 #[derive(Debug, Error)]
 pub enum Error {
   #[error("Validation error: {0}")]
-  ValidationError(Errors),
+  ValidationError(Report),
   #[error("Payload error: {0}")]
   JsonPayloadError(JsonPayloadError),
   #[error("Payload error: {0}")]
@@ -24,8 +24,8 @@ pub enum Error {
   QsError(serde_qs::Error),
 }
 
-impl From<Errors> for Error {
-  fn from(error: Errors) -> Self {
+impl From<Report> for Error {
+  fn from(error: Report) -> Self {
     Self::ValidationError(error)
   }
 }

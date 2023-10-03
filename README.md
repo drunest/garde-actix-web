@@ -13,6 +13,7 @@ Actix-web wrapper for [garde](https://github.com/jprochazk/garde), a Rust valida
 - [Installation](#installation)
 - [Usage example](#usage-example)
 - [Feature flags](#feature-flags)
+- [Compatibility matrix](#compatibility-matrix)
 - [About us](#about-us)
 
 ### Installation
@@ -60,6 +61,14 @@ Context needs to be provided through actix's `data` or `app_data`, if not found 
 | name       | description                                                   | extra dependencies                                                                           |
 |------------|---------------------------------------------------------------|----------------------------------------------------------------------------------------------|
 | `serde_qs` | Enables the usage of `garde` for `serde_qs::actix::QsQuery<T>` | [`serde_qs`](https://crates.io/crates/serde_qs)                                      |
+
+
+### Compatibility matrix
+
+| garde version | garde-actix-web-version |
+|---------------|-------------------------|
+| `0.14`        | `0.1.x`                 |
+| `0.15`        | `0.2.x`                 |
 
 
 ### About us
