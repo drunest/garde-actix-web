@@ -47,16 +47,14 @@ jobs:
           rustup component add rustfmt
           cargo fmt --all --check
 
-      - name: Check cranky
+      - name: Check clippy
         run: |
           rustup component add clippy
-          cargo install cargo-cranky --force
-          cargo cranky --no-deps --all-features --tests -- -D warnings -D clippy::print_stdout
+          cargo clippy --no-deps --all-features --tests -- -D warnings
 
-      - name: Check deny
-        run: |
-          cargo install cargo-deny --force
-          cargo deny check licenses sources advisories
+      - uses: EmbarkStudios/cargo-deny-action@v1
+        with:
+          commande: check licenses sources advisories
 
       - name: Run tests
         run: cargo test --all-features
