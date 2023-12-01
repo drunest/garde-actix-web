@@ -20,8 +20,8 @@ Actix-web wrapper for [garde](https://github.com/jprochazk/garde), a Rust valida
 
 ```toml
 [dependencies]
-garde = "0.14"
-garde-actix-web = "0.1.0"
+garde = "0.16"
+garde-actix-web = "0.3.0"
 ```
 
 ### Usage example
@@ -69,6 +69,7 @@ Context needs to be provided through actix's `data` or `app_data`, if not found 
 |---------------|-------------------------|
 | `0.14`        | `0.1.x`                 |
 | `0.15`        | `0.2.x`                 |
+| `0.16`        | `0.3.x`                 |
 
 
 ### About us
