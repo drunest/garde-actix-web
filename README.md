@@ -70,6 +70,7 @@ Context needs to be provided through actix's `data` or `app_data`, if not found 
 | `0.14`        | `0.1.x`                 |
 | `0.15`        | `0.2.x`                 |
 | `0.16`        | `0.3.x`                 |
+| `0.17`        | `0.4.x`                 |
 
 
 ### About us
