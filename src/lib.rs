@@ -4,8 +4,8 @@
 //!
 //! ```toml
 //! [dependencies]
-//! garde = "0.16"
-//! garde-actix-web = "0.3.0"
+//! garde = "0.18"
+//! garde-actix-web = "0.5.0"
 //! ```
 //!
 //! # Usage example
@@ -51,6 +51,7 @@
 //! | `0.15`        | `0.2.x`                 |
 //! | `0.16`        | `0.3.x`                 |
 //! | `0.17`        | `0.4.x`                 |
+//! | `0.18`        | `0.5.x`                 |
 
 #![forbid(unsafe_code)]
 use actix_web::web::Data;
