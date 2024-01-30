@@ -4,7 +4,7 @@ description = "Actix-web garde wrapper"
 readme = "README.md"
 keywords = ["garde", "actix", "actix-web", "validation"]
 categories = ["web-programming"]
-version = "0.5.0"
+version = "0.5.1"
 
 authors = ["Netwo <oss@netwo.com>"]
 edition = "2021"
@@ -19,7 +19,7 @@ actix-router = "0.5"
 actix-web = "4"
 derive_more = "0.99"
 futures = "0.3"
-garde = { version = "0.18", features = ["full"] }
+garde = { version = "0.18", features = ["derive", "serde"] }
 log = "0.4"
 mime = "0.3"
 pin-project-lite = "0.2"

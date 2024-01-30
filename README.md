@@ -21,7 +21,7 @@ Actix-web wrapper for [garde](https://github.com/jprochazk/garde), a Rust valida
 ```toml
 [dependencies]
 garde = "0.18"
-garde-actix-web = "0.5.0"
+garde-actix-web = "0.5.1"
 ```
 
 ### Usage example
