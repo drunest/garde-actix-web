@@ -51,9 +51,10 @@
 //! | `0.15`        | `0.2.x`                 |
 //! | `0.16`        | `0.3.x`                 |
 //! | `0.17`        | `0.4.x`                 |
-//! | `0.18`        | `0.5.x`                 |
+//! | `0.18`        | `0.5.x`, `0.6.x`        |
 
 #![forbid(unsafe_code)]
+
 use actix_web::web::Data;
 use actix_web::HttpRequest;
 use garde::Validate;
@@ -62,9 +63,9 @@ pub mod error;
 pub mod web;
 
 fn validate_for_request<T>(data: T, req: &HttpRequest) -> Result<T, error::Error>
-where
-  T: Validate + 'static,
-  T::Context: Default,
+  where
+    T: Validate + 'static,
+    T::Context: Default,
 {
   let context = req
     .app_data::<T::Context>()
