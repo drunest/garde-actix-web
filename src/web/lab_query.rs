@@ -49,20 +49,18 @@ where
           validate_for_request(data.0, &req)
         })
         .map(|res| Self(res))
-        .or_else(move |e| {
+        .map_err(move |e| {
           log::debug!(
             "Failed during Query extractor deserialization. \
                      Request path: {:?}",
             req.path()
           );
 
-          let e = if let Some(error_handler) = error_handler {
+          if let Some(error_handler) = error_handler {
             (error_handler)(e, &req)
           } else {
             e.into()
-          };
-
-          Err(e)
+          }
         })
     })
   }
