@@ -32,7 +32,7 @@ actix-web-lab = { version = "0.20", optional = true }
 serde_qs = { version = "0.12", optional = true }
 
 [features]
-lab_query = ["actix-web-lab"]
+lab_query = ["dep:actix-web-lab"]
 serde_qs = ["dep:serde_qs"]
 
 [dev-dependencies]
