@@ -63,9 +63,9 @@ pub mod error;
 pub mod web;
 
 fn validate_for_request<T>(data: T, req: &HttpRequest) -> Result<T, error::Error>
-  where
-    T: Validate + 'static,
-    T::Context: Default,
+where
+  T: Validate + 'static,
+  T::Context: Default,
 {
   let context = req
     .app_data::<T::Context>()

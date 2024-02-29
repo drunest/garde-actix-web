@@ -1,4 +1,5 @@
 use crate::validate_for_request;
+use crate::web::QueryConfig;
 use actix_web::dev::Payload;
 use actix_web::error::QueryPayloadError;
 use actix_web::{Error, FromRequest, HttpRequest};
@@ -6,7 +7,6 @@ use actix_web_lab::__reexports::futures_util::future::LocalBoxFuture;
 use garde::Validate;
 use serde::de;
 use serde::de::DeserializeOwned;
-use crate::web::QueryConfig;
 
 /// Drop in replacement for [actix_web_lab::extract::Query](https://docs.rs/actix-web-lab/latest/actix_web_lab/extract/struct.Query.html)
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
@@ -20,15 +20,14 @@ impl<T> Query<T> {
 
 impl<T: DeserializeOwned> Query<T> {
   pub fn from_query(query_str: &str) -> Result<Self, QueryPayloadError> {
-    actix_web_lab::extract::Query::from_query(query_str)
-      .map(|r: actix_web_lab::extract::Query<T>| Self(r.into_inner()))
+    actix_web_lab::extract::Query::from_query(query_str).map(|r: actix_web_lab::extract::Query<T>| Self(r.into_inner()))
   }
 }
 
 impl<T> FromRequest for Query<T>
-  where
-    T: DeserializeOwned + Validate + 'static,
-    T::Context: Default,
+where
+  T: DeserializeOwned + Validate + 'static,
+  T::Context: Default,
 {
   type Error = Error;
   type Future = LocalBoxFuture<'static, Result<Self, Self::Error>>;
@@ -52,10 +51,10 @@ impl<T> FromRequest for Query<T>
         .map(|res| Self(res))
         .or_else(move |e| {
           log::debug!(
-          "Failed during Query extractor deserialization. \
+            "Failed during Query extractor deserialization. \
                      Request path: {:?}",
-          req.path()
-        );
+            req.path()
+          );
 
           let e = if let Some(error_handler) = error_handler {
             (error_handler)(e, &req)
@@ -136,7 +135,7 @@ mod test {
         )
         .service(resource("/").route(post().to(test_handler))),
     )
-      .await;
+    .await;
 
     let req = TestRequest::post().uri("/?age=24").to_request();
     let resp = call_service(&app, req).await;
@@ -155,7 +154,7 @@ mod test {
         .app_data(number_context)
         .service(resource("/").route(post().to(test_handler_with_context))),
     )
-      .await;
+    .await;
 
     let req = TestRequest::post().uri("/?age=24").to_request();
     let resp = call_service(&app, req).await;
