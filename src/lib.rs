@@ -51,9 +51,10 @@
 //! | `0.15`        | `0.2.x`                 |
 //! | `0.16`        | `0.3.x`                 |
 //! | `0.17`        | `0.4.x`                 |
-//! | `0.18`        | `0.5.x`                 |
+//! | `0.18`        | `0.5.x`, `0.6.x`        |
 
 #![forbid(unsafe_code)]
+
 use actix_web::web::Data;
 use actix_web::HttpRequest;
 use garde::Validate;

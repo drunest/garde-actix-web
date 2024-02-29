@@ -1,15 +1,15 @@
 use crate::validate_for_request;
+use crate::web::QueryConfig;
 use actix_web::dev::Payload;
 use actix_web::error::QueryPayloadError;
 use actix_web::{Error, FromRequest, HttpRequest};
-use derive_more::{AsRef, Deref, DerefMut, Display, From};
-use futures::future::{err, ok, Ready};
+use actix_web_lab::__reexports::futures_util::future::LocalBoxFuture;
 use garde::Validate;
+use serde::de;
 use serde::de::DeserializeOwned;
-use std::sync::Arc;
 
-/// Drop in replacement for [actix_web::web::Query](https://docs.rs/actix-web/latest/actix_web/web/struct.Query.html)
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Deref, DerefMut, AsRef, Display, From)]
+/// Drop in replacement for [actix_web_lab::extract::Query](https://docs.rs/actix-web-lab/latest/actix_web_lab/extract/struct.Query.html)
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub struct Query<T>(pub T);
 
 impl<T> Query<T> {
@@ -20,9 +20,7 @@ impl<T> Query<T> {
 
 impl<T: DeserializeOwned> Query<T> {
   pub fn from_query(query_str: &str) -> Result<Self, QueryPayloadError> {
-    serde_urlencoded::from_str::<T>(query_str)
-      .map(Self)
-      .map_err(QueryPayloadError::Deserialize)
+    actix_web_lab::extract::Query::from_query(query_str).map(|r: actix_web_lab::extract::Query<T>| Self(r.into_inner()))
   }
 }
 
@@ -32,56 +30,39 @@ where
   T::Context: Default,
 {
   type Error = Error;
-  type Future = Ready<Result<Self, Error>>;
+  type Future = LocalBoxFuture<'static, Result<Self, Self::Error>>;
 
   #[inline]
-  fn from_request(req: &HttpRequest, _: &mut Payload) -> Self::Future {
+  fn from_request(req: &HttpRequest, payload: &mut Payload) -> Self::Future {
     let req_copy = req.clone();
+    let req = req.clone();
+    let mut payload = payload.take();
+
     let error_handler = req.app_data::<QueryConfig>().and_then(|c| c.err_handler.clone());
 
-    serde_urlencoded::from_str::<T>(req.query_string())
-      .map_err(|e| {
-        let e = QueryPayloadError::Deserialize(e);
-        crate::error::Error::QueryPayloadError(e)
-      })
-      .and_then(|data: T| {
-        let req = req_copy;
-        validate_for_request(data, &req)
-      })
-      .map(|val| ok(Query(val)))
-      .unwrap_or_else(move |e| {
-        log::debug!(
-          "Failed during Query extractor deserialization. \
+    Box::pin(async move {
+      actix_web_lab::extract::Query::from_request(&req, &mut payload)
+        .await
+        .map_err(|e| QueryPayloadError::Deserialize(de::Error::custom(format!("{}", e))).into())
+        .and_then(|data| {
+          let req = req_copy;
+          validate_for_request(data.0, &req)
+        })
+        .map(|res| Self(res))
+        .map_err(move |e| {
+          log::debug!(
+            "Failed during Query extractor deserialization. \
                      Request path: {:?}",
-          req.path()
-        );
+            req.path()
+          );
 
-        let e = if let Some(error_handler) = error_handler {
-          (error_handler)(e, req)
-        } else {
-          e.into()
-        };
-
-        err(e)
-      })
-  }
-}
-
-/// Replacement for [actix_web::web::QueryConfig](https://docs.rs/actix-web/latest/actix_web/web/struct.QueryConfig.html)
-/// Error handler must map from an `garde_actix_web::error::Error`
-#[derive(Clone, Default)]
-pub struct QueryConfig {
-  #[allow(clippy::type_complexity)]
-  pub(crate) err_handler: Option<Arc<dyn Fn(crate::error::Error, &HttpRequest) -> Error + Send + Sync>>,
-}
-
-impl QueryConfig {
-  pub fn error_handler<F>(mut self, f: F) -> Self
-  where
-    F: Fn(crate::error::Error, &HttpRequest) -> Error + Send + Sync + 'static,
-  {
-    self.err_handler = Some(Arc::new(f));
-    self
+          if let Some(error_handler) = error_handler {
+            (error_handler)(e, &req)
+          } else {
+            e.into()
+          }
+        })
+    })
   }
 }
 
@@ -130,7 +111,7 @@ mod test {
   }
 
   #[tokio::test]
-  async fn test_simple_query_validation() {
+  async fn test_simple_lab_query_validation() {
     let app = init_service(App::new().service(resource("/").route(post().to(test_handler)))).await;
 
     let req = TestRequest::post().uri("/?age=24").to_request();
@@ -143,7 +124,7 @@ mod test {
   }
 
   #[tokio::test]
-  async fn test_query_validation_custom_config() {
+  async fn test_lab_query_validation_custom_config() {
     let app = init_service(
       App::new()
         .app_data(
@@ -164,7 +145,7 @@ mod test {
   }
 
   #[tokio::test]
-  async fn test_query_validation_with_context() {
+  async fn test_lab_query_validation_with_context() {
     let number_context = NumberContext { min: 25 };
     let app = init_service(
       App::new()
@@ -183,7 +164,7 @@ mod test {
   }
 
   #[tokio::test]
-  async fn test_query_validation_with_missing_context() {
+  async fn test_lab_query_validation_with_missing_context() {
     let app = init_service(App::new().service(resource("/").route(post().to(test_handler_with_context)))).await;
 
     let req = TestRequest::post().uri("/?age=24").to_request();
