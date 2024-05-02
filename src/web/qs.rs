@@ -105,7 +105,7 @@ where
       let mut bytes = web::BytesMut::new();
 
       while let Some(item) = stream.next().await {
-        bytes.extend_from_slice(&item.unwrap());
+        bytes.extend_from_slice(&item?);
       }
 
       query_config
