@@ -4,7 +4,7 @@ description = "Actix-web garde wrapper"
 readme = "README.md"
 keywords = ["garde", "actix", "actix-web", "validation"]
 categories = ["web-programming"]
-version = "0.6.0"
+version = "0.7.0"
 
 authors = ["Netwo <oss@netwo.com>"]
 edition = "2021"
@@ -29,7 +29,7 @@ thiserror = "1.0"
 
 actix-web-lab = { version = "0.20", optional = true }
 
-serde_qs = { version = "0.12", optional = true }
+serde_qs = { version = "0.13", optional = true }
 
 [features]
 lab_query = ["dep:actix-web-lab"]
