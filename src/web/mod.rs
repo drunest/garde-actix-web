@@ -18,5 +18,5 @@ pub use json::{Json, JsonConfig};
 pub use lab_query::Query as LabQuery;
 pub use path::{Path, PathConfig};
 #[cfg(feature = "serde_qs")]
-pub use qs::{QsQuery, QsQueryConfig, QsForm};
+pub use qs::{QsForm, QsQuery, QsQueryConfig};
 pub use query::{Query, QueryConfig};

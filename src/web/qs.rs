@@ -293,16 +293,16 @@ mod test {
     let app = init_service(App::new().service(resource("/").route(post().to(test_form_handler)))).await;
 
     let req = TestRequest::post()
-        .uri("/")
-        .set_form(&FormData { age: 24 })
-        .to_request();
+      .uri("/")
+      .set_form(&FormData { age: 24 })
+      .to_request();
     let resp = call_service(&app, req).await;
     assert_eq!(resp.status(), StatusCode::OK);
 
     let req = TestRequest::post()
-        .uri("/")
-        .set_form(&FormData { age: 30 })
-        .to_request();
+      .uri("/")
+      .set_form(&FormData { age: 30 })
+      .to_request();
     let resp = call_service(&app, req).await;
     assert_eq!(resp.status(), StatusCode::BAD_REQUEST);
   }
@@ -311,25 +311,25 @@ mod test {
   async fn test_form_validation_custom_config() {
     let app = init_service(
       App::new()
-          .app_data(
-            FormConfig::default()
-                .error_handler(|err, _req| InternalError::from_response(err, HttpResponse::Conflict().finish()).into()),
-          )
-          .service(resource("/").route(post().to(test_form_handler))),
+        .app_data(
+          FormConfig::default()
+            .error_handler(|err, _req| InternalError::from_response(err, HttpResponse::Conflict().finish()).into()),
+        )
+        .service(resource("/").route(post().to(test_form_handler))),
     )
-        .await;
+    .await;
 
     let req = TestRequest::post()
-        .uri("/")
-        .set_form(&FormData { age: 24 })
-        .to_request();
+      .uri("/")
+      .set_form(&FormData { age: 24 })
+      .to_request();
     let resp = call_service(&app, req).await;
     assert_eq!(resp.status(), StatusCode::OK);
 
     let req = TestRequest::post()
-        .uri("/")
-        .set_form(&FormData { age: 30 })
-        .to_request();
+      .uri("/")
+      .set_form(&FormData { age: 30 })
+      .to_request();
     let resp = call_service(&app, req).await;
     assert_eq!(resp.status(), StatusCode::CONFLICT);
   }
@@ -339,22 +339,22 @@ mod test {
     let number_context = NumberContext { min: 25 };
     let app = init_service(
       App::new()
-          .app_data(number_context)
-          .service(resource("/").route(post().to(test_form_handler_with_context))),
+        .app_data(number_context)
+        .service(resource("/").route(post().to(test_form_handler_with_context))),
     )
-        .await;
+    .await;
 
     let req = TestRequest::post()
-        .uri("/")
-        .set_form(&FormData { age: 24 })
-        .to_request();
+      .uri("/")
+      .set_form(&FormData { age: 24 })
+      .to_request();
     let resp = call_service(&app, req).await;
     assert_eq!(resp.status(), StatusCode::BAD_REQUEST);
 
     let req = TestRequest::post()
-        .uri("/")
-        .set_form(&FormData { age: 30 })
-        .to_request();
+      .uri("/")
+      .set_form(&FormData { age: 30 })
+      .to_request();
     let resp = call_service(&app, req).await;
     assert_eq!(resp.status(), StatusCode::OK);
   }
@@ -364,16 +364,16 @@ mod test {
     let app = init_service(App::new().service(resource("/").route(post().to(test_form_handler_with_context)))).await;
 
     let req = TestRequest::post()
-        .uri("/")
-        .set_form(&FormData { age: 24 })
-        .to_request();
+      .uri("/")
+      .set_form(&FormData { age: 24 })
+      .to_request();
     let resp = call_service(&app, req).await;
     assert_eq!(resp.status(), StatusCode::OK);
 
     let req = TestRequest::post()
-        .uri("/")
-        .set_form(&FormData { age: 30 })
-        .to_request();
+      .uri("/")
+      .set_form(&FormData { age: 30 })
+      .to_request();
     let resp = call_service(&app, req).await;
     assert_eq!(resp.status(), StatusCode::OK);
   }
